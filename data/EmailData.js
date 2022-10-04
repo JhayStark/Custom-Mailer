@@ -1,5 +1,6 @@
 export const inbox = [
   {
+    id: 1,
     starred: true,
     from: "Joel",
     subject: "hey",
@@ -8,6 +9,7 @@ export const inbox = [
     read: true,
   },
   {
+    id: 2,
     starred: true,
     from: "Sam",
     subject: "hey",
@@ -16,6 +18,7 @@ export const inbox = [
     read: true,
   },
   {
+    id: 3,
     starred: false,
     from: "Fred",
     subject: "hey",
@@ -24,6 +27,7 @@ export const inbox = [
     read: true,
   },
   {
+    id: 4,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -32,6 +36,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 5,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -40,6 +45,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 6,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -48,6 +54,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 7,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -56,6 +63,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 8,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -64,6 +72,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 9,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -72,6 +81,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 10,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -80,6 +90,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 11,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -88,6 +99,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 12,
     starred: false,
     from: "Kay",
     subject: "hey",
@@ -96,6 +108,7 @@ export const inbox = [
     read: false,
   },
   {
+    id: 13,
     starred: false,
     from: "Kay",
     subject: "hey",
