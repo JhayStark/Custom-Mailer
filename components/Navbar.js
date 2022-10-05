@@ -4,6 +4,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const Navbar = () => {
   return (
@@ -31,7 +32,10 @@ const Navbar = () => {
           <Link href="/profile">
             <AccountCircleIcon className="text-violet-500 " />
           </Link>
-          <LogoutIcon className="text-violet-500 " />
+          <LogoutIcon
+            className="text-violet-500 "
+            onClick={() => signOut({ callbackUrl: "/auth/login" })}
+          />
         </div>
       </nav>
     </div>

@@ -29,7 +29,7 @@ const Sidebar = () => {
               Outbox
             </div>
           </Link>
-          <Link href="/drafts">
+          <Link href="/starred">
             <div className="items-center  rounded-md  p-2 shadow-sm hover:bg-slate-200 cursor-pointer ">
               <StarIcon className="text-violet-500" />
               Starred

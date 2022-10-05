@@ -3,7 +3,7 @@ import React from "react";
 import { inbox } from "../../data/EmailData";
 
 const InboxScreen = () => {
-  const { query, isReady } = useRouter();
+  const { query } = useRouter();
   const { id } = query;
   const messageData = inbox.find((x) => x.id === id);
   console.log(query);

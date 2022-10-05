@@ -10,7 +10,7 @@ const Outbox = () => {
   return (
     <div className="flex ">
       <Sidebar />
-      <div className="w-[100%]">
+      <div className="w-[100%] m-2 rounded-md h-[70%] border-gray-300 border-2">
         <div className=" flex border-b border-gray-500 ">
           <CheckBox />
           <IconButton>
@@ -20,8 +20,8 @@ const Outbox = () => {
             <MoreVertIcon />
           </IconButton>
         </div>
-        <div className="items-center">
-          {outbox.map(({ starred, to, subject, message, sent, read }) => (
+        <div className="items-center overflow-y-auto h-[32rem]">
+          {outbox.map(({ starred, to, subject, message, sent, read, id }) => (
             <OutboxItem
               starred={starred}
               to={to}
@@ -29,6 +29,7 @@ const Outbox = () => {
               message={message}
               sent={sent}
               read={read}
+              key={id}
             />
           ))}
         </div>
