@@ -6,8 +6,18 @@ import IconButton from "@material-ui/core/IconButton";
 import { inbox } from "../../data/EmailData";
 import InboxItem from "../../components/InboxItem";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 const Inbox = () => {
+  const { status } = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    if (status !== "authenticated") {
+      router.push("/auth/login");
+    }
+  }, [status]);
   return (
     <div className="flex  ">
       <Sidebar />
