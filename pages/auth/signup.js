@@ -1,12 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import mail1 from "./assests/mail1.jpg";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-const signup = () => {
+const Signup = () => {
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    dateOfBirth: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    telephone: "",
+  });
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(data);
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      dateOfBirth,
+      telephone,
+    } = data;
+    if (
+      firstName == "" &&
+      lastName == "" &&
+      email == "" &&
+      password == "" &&
+      confirmPassword == "" &&
+      dateOfBirth == ""
+    ) {
+      setError("Please provide all the information");
+      return;
+    }
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setError("Please enter a valid email");
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+    }
+
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/register`,
+        data
+      );
+      router.push("/api/auth/signin");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
     <div>
-      <div className=" w-[60%] flex m-auto items-center justify-center mt-[10%] border-2 border-gray-500 rounded-xl p-4 ">
-        <form>
+      <div className=" w-[60%] flex m-auto items-center justify-center mt-[5%] border-2 border-gray-500 rounded-xl p-4 ">
+        <form onSubmit={handleSubmit}>
+          {error && <p>{error}</p>}
           <div className="flex flex-row gap-6 ">
             <div className="flex flex-col gap-4 justify-start items-start">
               <h2 className="font-bold text-xl text-blue-300">RAVEN</h2>
@@ -20,41 +79,70 @@ const signup = () => {
                 <input
                   type="text"
                   placeholder="First Name"
+                  name="firstName"
+                  id="firstName"
+                  value={data.firstName}
+                  onChange={handleChange}
                   className="outline-none border-2 border-gray-400 rounded-lg p-1"
                 />
                 <input
                   type="text"
                   placeholder="Last Name"
+                  name="lastName"
+                  id="lastName"
+                  value={data.lastName}
+                  onChange={handleChange}
                   className="outline-none border-2 border-gray-400 rounded-lg p-1"
                 />
               </div>
               <input
                 type="date"
+                name="dateOfBirth"
+                id="dateOfBirth"
+                value={data.dateOfBirth}
+                onChange={handleChange}
                 className="outline-none border-2 border-gray-400 rounded-lg p-1"
               />
               <input
                 type="text"
-                placeholder="username"
+                name="email"
+                placeholder="email"
+                id="email"
+                value={data.email}
+                onChange={handleChange}
                 className="outline-none border-2 border-gray-400 rounded-lg p-1"
               />
               <input
-                type="telephone"
+                type="tel"
                 placeholder="telephone"
+                name="telephone"
+                value={data.telephone}
+                onChange={handleChange}
                 className="outline-none border-2 border-gray-400 rounded-lg p-1"
               />
               <div className="flex  sm:flex-col md:flex-row lg:flex-row gap-2">
                 <input
-                  type="text"
+                  type="password"
+                  id="password"
+                  name="password"
                   placeholder="password"
+                  value={data.password}
+                  onChange={handleChange}
                   className="outline-none border-2 border-gray-400 rounded-lg p-1"
                 />
                 <input
-                  type="text"
+                  type="password"
                   placeholder="confirm password"
+                  name="confirmPassword"
+                  value={data.confirmPassword}
+                  onChange={handleChange}
                   className="outline-none border-2 border-gray-400 rounded-lg p-1"
                 />
               </div>
-              <button className="border-2 rounded-lg p-2 bg-blue-300 hover:bg-blue-500 outline-none justify-center m-auto">
+              <button
+                type="submit"
+                className="border-2 rounded-lg p-2 bg-blue-300 hover:bg-blue-500 outline-none justify-center m-auto"
+              >
                 Sign Up
               </button>
             </div>
@@ -68,4 +156,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;

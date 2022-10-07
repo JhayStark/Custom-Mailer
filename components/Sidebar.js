@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Sidebar = () => {
   return (
-    <div className="border-r-2 border-slate-300 w-40 static h-[36rem] ">
+    <div className="border-r-2 border-slate-300 w-40 static h-[100-15vh] ">
       <div className="py-2">
         <Link href="/compose">
           <div className="items-center bg-teal-200 rounded-lg m-3 p-4 shadow-lg font-semibold text-gray-500 hover:bg-teal-400 flex cursor-pointer">

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-const login = () => {
+const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -62,9 +63,11 @@ const login = () => {
             <p className="mt-0 ml-4 text-sm">Forgot password?</p>
           </div>
           <div className="flex justify-between">
-            <button className="ml-4 font-medium text-sm text-blue-500 rounded-xl hover:bg-blue-100 h-8 cursor-pointer p-2">
-              Create Account
-            </button>
+            <Link href="/auth/signup">
+              <button className="ml-4 font-medium text-sm text-blue-500 rounded-xl hover:bg-blue-100 h-8 cursor-pointer p-2">
+                Create Account
+              </button>
+            </Link>
             <button
               type="submit"
               className="bg-blue-400 text-white rounded-lg p-2 flex items-center justify-center m-4 w-[20%] hover:bg-blue-600"
@@ -78,4 +81,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

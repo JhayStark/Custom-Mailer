@@ -8,15 +8,15 @@ import { signOut } from "next-auth/react";
 
 const Navbar = () => {
   return (
-    <div className="border-b border-b-gray-400 shadow-md ">
-      <nav className=" flex justify-between py-2 max-w-6xl mx-auto">
+    <div className="border-b border-b-gray-400 shadow-md  min-w-screen ">
+      <nav className=" flex justify-between py-2 max-w-7xl mx-auto px-4 ">
         <div className="flex items-center text-lg gap-2">
           <Link href="/inbox">
             <MailOutlineIcon className="text-gray-700" />
           </Link>
           <span className="text-gray-500 font-semibold">Raven</span>
         </div>
-        <div className="rounded-lg w-[60%] border-gray-400 bg-violet-100  ">
+        <div className="rounded-lg w-[60%] border-gray-400 bg-violet-100 sm:w-[35%] md:w-[40%] lg:[60%]  ">
           <SearchIcon className="text-violet-500" />
           <input
             type="text"

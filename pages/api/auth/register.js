@@ -7,7 +7,9 @@ async function handler(req, res) {
     res.status(405).json({ error: "Only POST method is allowed" });
   }
 
-  const { firstName, lastName, email, dateOfBirth, password, phoneNumber } =
+  console.log(req.body);
+
+  const { firstName, lastName, email, dateOfBirth, password, telephone } =
     req.body;
 
   await db.connect();
@@ -26,7 +28,7 @@ async function handler(req, res) {
     email,
     dateOfBirth,
     password: hashedPassword,
-    phoneNumber,
+    telephone,
   });
   res.status(201).json({ user });
 }

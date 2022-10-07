@@ -17,17 +17,29 @@ const userSchema = new mongoose.Schema(
     },
     dateOfBirth: {
       type: String,
-      required: true,
     },
     password: {
       type: String,
       required: true,
-      unique: true,
     },
-    phoneNumber: {
-      type: Number,
-      unique: true,
-      required: true,
+    inbox: {
+      type: Array,
+      default: [],
+    },
+    outbox: {
+      type: Array,
+      default: [],
+    },
+    starred: {
+      type: Array,
+      default: [],
+    },
+    deleted: {
+      type: Array,
+      default: [],
+    },
+    telephone: {
+      type: String,
     },
   },
   { timestamps: true }

@@ -8,12 +8,14 @@ import { inbox } from "../data/EmailData";
 
 const InboxItem = ({ starred, from, subject, message, recieved, id }) => {
   return (
-    <div className="flex items-center mr-1 border-b border-gray-400 cursor-pointer">
-      <CheckBox />
-      <IconButton>{starred ? <StarIcon /> : <StarOutlineIcon />}</IconButton>
-      <IconButton>
-        <DeleteForeverIcon />
-      </IconButton>
+    <div className="flex items-center mr-1 cursor-pointer">
+      <div className="flex sm:flex-col md:flex-row lg:flex-row">
+        <CheckBox />
+        <IconButton>{starred ? <StarIcon /> : <StarOutlineIcon />}</IconButton>
+        <IconButton>
+          <DeleteForeverIcon />
+        </IconButton>
+      </div>
       <div className="w-full flex justify-between ">
         <p className="font-medium">{from}</p>
         <Link href={`/inbox/${id}`}>

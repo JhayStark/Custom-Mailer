@@ -19,9 +19,9 @@ const Inbox = () => {
     }
   }, [status]);
   return (
-    <div className="flex  ">
+    <div className="flex">
       <Sidebar />
-      <div className="w-[100%] m-2 rounded-md h-[70%] border-gray-300 border-2">
+      <div className="w-[100%] m-2 rounded-md h-[100vh-15vh] border-gray-300 overflow-x-auto  border-2">
         <div className=" flex border-b border-gray-500 ">
           <CheckBox />
           <IconButton>
@@ -31,7 +31,7 @@ const Inbox = () => {
             <MoreVertIcon />
           </IconButton>
         </div>
-        <div className="items-center overflow-y-auto h-[32rem] ">
+        <div className="items-center overflow-y-auto h-[32rem] divide-y-2 divide-gray-300">
           {inbox.map(
             ({ starred, from, subject, message, recieved, read, id }) => (
               <InboxItem
