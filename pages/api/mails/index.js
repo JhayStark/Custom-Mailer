@@ -29,22 +29,41 @@ export default async function handler(req, res) {
       const { to, subject, message } = req.body;
 
       const recipientId = to;
-      const recipient = await User.findOne({ email: recipientId });
-      if (recipient) {
-        const email = await Email.create({
-          from: sender.email,
-          to,
-          subject,
-          message,
-          time: time,
-        });
-
-        await recipient.updateOne({ $push: { inbox: email._id } });
-        await sender.updateOne({ $push: { outbox: email._id } });
-        res.status(201).json({ email });
-      } else {
-        res.status(404).json({ message: "recipient not found" });
+      const recipients = recipientId.split(",");
+      for (let i = 0; i < recipients.length; i++) {
+        const recipient = await User.findOne({ email: recipients[i] });
+        if (recipient) {
+          const email = await Email.create({
+            from: sender.email,
+            to: recipient.email,
+            subject,
+            message,
+            time: time,
+          });
+          await recipient.updateOne({ $push: { inbox: email._id } });
+          await sender.updateOne({ $push: { outbox: email._id } });
+          res.status(201).json({ email });
+        } else {
+          res.status(404).json({ message: "recipient not found" });
+        }
       }
+
+      // const recipient = await User.findOne({ email: recipientId });
+      // if (recipient) {
+      //   const email = await Email.create({
+      //     from: sender.email,
+      //     to,
+      //     subject,
+      //     message,
+      //     time: time,
+      //   });
+
+      //   await recipient.updateOne({ $push: { inbox: email._id } });
+      //   await sender.updateOne({ $push: { outbox: email._id } });
+      //   res.status(201).json({ email });
+      // } else {
+      //   res.status(404).json({ message: "recipient not found" });
+      // }
     } catch (error) {
       console.log(`${error}`);
     }

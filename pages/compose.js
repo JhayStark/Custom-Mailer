@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const Compose = () => {
   const [data, setData] = useState({
