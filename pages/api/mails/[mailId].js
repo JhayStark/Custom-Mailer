@@ -3,10 +3,10 @@ import Email from "../../../models/email";
 
 export async function handler(req, res) {
   if (req.method === "GET") {
-    const { postId } = req.params;
+    const { mailId } = req.params;
     await db.connect();
 
-    const email = await Email.findById(postId);
+    const email = await Email.findById(mailId);
     db.disconnect();
 
     if (!email) {

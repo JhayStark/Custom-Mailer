@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 const Navbar = () => {
   return (

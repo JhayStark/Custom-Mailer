@@ -6,8 +6,19 @@ import IconButton from "@material-ui/core/IconButton";
 import { outbox, inbox } from "../data/EmailData";
 import OutboxItem from "../components/OutboxItem";
 import StarredItem from "../components/StarredItem";
+import { getStarred } from "../utils/getEmails";
 
-const Drafts = () => {
+export async function getStaticProps() {
+  const emails = await getStarred();
+
+  return {
+    props: {
+      emails,
+    },
+  };
+}
+
+const Drafts = ({ emails }) => {
   return (
     <div className="flex ">
       <Sidebar />
@@ -22,19 +33,16 @@ const Drafts = () => {
           </IconButton>
         </div>
         <div className="items-center overflow-y-auto h-[32rem]">
-          {inbox.map(
-            ({ starred, from, subject, message, recieved, read, id }) => (
-              <StarredItem
-                starred={starred}
-                from={from}
-                subject={subject}
-                message={message}
-                recieved={recieved}
-                read={read}
-                key={id}
-              />
-            )
-          )}
+          {emails.map((email) => (
+            <StarredItem
+              starred={email.starred}
+              from={email.from}
+              subject={email.subject}
+              message={email.message}
+              time={email.time}
+              key={email.id}
+            />
+          ))}
         </div>
       </div>
     </div>

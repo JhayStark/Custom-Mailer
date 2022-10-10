@@ -5,15 +5,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
 
-const StarredItem = ({
-  starred,
-  from,
-  recieved,
-  subject,
-  message,
-  read,
-  id,
-}) => {
+const StarredItem = ({ starred, from, time, subject, message, read, id }) => {
   return (
     <div className="flex items-center mr-1 border-b border-gray-400 cursor-pointer">
       <CheckBox />
@@ -30,7 +22,7 @@ const StarredItem = ({
             {subject}-<span className="font-normal">{message}</span>
           </p>
         </Link>
-        <p className="font-medium px-2">{recieved}</p>
+        <p className="font-medium px-2">{time}</p>
       </div>
     </div>
   );

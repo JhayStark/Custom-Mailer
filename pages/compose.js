@@ -11,6 +11,7 @@ const Compose = () => {
     subject: "",
     message: "",
   });
+  const { data: session } = useSession();
 
   const [error, setError] = useState("");
   const router = useRouter();
@@ -19,13 +20,17 @@ const Compose = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  // console.log(session);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/mails`,
-        { ...data }
+        { ...data, fromUser: session?.user?._id }
       );
+
+      // console.log(res);
     } catch (error) {
       setError(error.message);
     }

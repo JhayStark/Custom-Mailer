@@ -5,8 +5,19 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import { outbox } from "../data/EmailData";
 import OutboxItem from "../components/OutboxItem";
+import { getOutbox } from "../utils/getEmails";
 
-const Outbox = () => {
+export async function getStaticProps() {
+  const emails = await getOutbox();
+
+  return {
+    props: {
+      emails,
+    },
+  };
+}
+
+const Outbox = ({ emails }) => {
   return (
     <div className="flex ">
       <Sidebar />
@@ -21,15 +32,14 @@ const Outbox = () => {
           </IconButton>
         </div>
         <div className="items-center overflow-y-auto h-[32rem]">
-          {outbox.map(({ starred, to, subject, message, sent, read, id }) => (
+          {emails.map((email) => (
             <OutboxItem
-              starred={starred}
-              to={to}
-              subject={subject}
-              message={message}
-              sent={sent}
-              read={read}
-              key={id}
+              starred={email.starred}
+              to={email.to}
+              subject={email.subject}
+              message={email.message}
+              time={email.time}
+              key={email._id}
             />
           ))}
         </div>

@@ -3,21 +3,34 @@ import CheckBox from "@material-ui/core/Checkbox";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
-import { inbox } from "../../data/EmailData";
 import InboxItem from "../../components/InboxItem";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { getEmails, getInbox } from "../../utils/getEmails";
 
-const Inbox = () => {
-  const { status } = useSession();
+export async function getStaticProps() {
+  const emails = await getInbox();
+
+  return {
+    props: {
+      emails,
+    },
+  };
+}
+
+const Inbox = ({ emails }) => {
+  const { data, status } = useSession();
   const router = useRouter();
   useEffect(() => {
     if (status !== "authenticated") {
       router.push("/auth/login");
     }
   }, [status]);
+
+  // console.log(data);
+
   return (
     <div className="flex">
       <Sidebar />
@@ -32,20 +45,17 @@ const Inbox = () => {
           </IconButton>
         </div>
         <div className="items-center overflow-y-auto h-[32rem] divide-y-2 divide-gray-300">
-          {inbox.map(
-            ({ starred, from, subject, message, recieved, read, id }) => (
-              <InboxItem
-                starred={starred}
-                from={from}
-                subject={subject}
-                message={message}
-                recieved={recieved}
-                read={read}
-                key={id}
-                id={id}
-              />
-            )
-          )}
+          {emails.map((email) => (
+            <InboxItem
+              starred={email.starred}
+              from={email.from}
+              subject={email.subject}
+              message={email.message}
+              time={email.time}
+              key={email._id}
+              id={email._id}
+            />
+          ))}
         </div>
       </div>
     </div>

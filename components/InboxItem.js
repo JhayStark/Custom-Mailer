@@ -6,7 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
 import { inbox } from "../data/EmailData";
 
-const InboxItem = ({ starred, from, subject, message, recieved, id }) => {
+const InboxItem = ({ starred, from, subject, message, time, id }) => {
   return (
     <div className="flex items-center mr-1 cursor-pointer">
       <div className="flex sm:flex-col md:flex-row lg:flex-row">
@@ -23,7 +23,7 @@ const InboxItem = ({ starred, from, subject, message, recieved, id }) => {
             {subject}-<span className="font-normal">{message}</span>
           </p>
         </Link>
-        <p className="font-medium px-2">{recieved}</p>
+        <p className="font-medium px-2">{time}</p>
       </div>
     </div>
   );

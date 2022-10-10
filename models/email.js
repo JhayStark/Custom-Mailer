@@ -32,6 +32,9 @@ const emailSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    time: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
