@@ -4,26 +4,42 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
-import { inbox } from "../data/EmailData";
+import axios from "axios";
 
-const InboxItem = ({ starred, from, subject, message, time, id }) => {
+const InboxItem = ({
+  starred,
+  from,
+  subject,
+  message,
+  time,
+  id,
+  deleted,
+  handleStar,
+  handleDelete,
+}) => {
   return (
     <div className="flex items-center mr-1 cursor-pointer">
       <div className="flex sm:flex-col md:flex-row lg:flex-row">
         <CheckBox />
-        <IconButton>{starred ? <StarIcon /> : <StarOutlineIcon />}</IconButton>
         <IconButton>
-          <DeleteForeverIcon />
+          {starred ? (
+            <StarIcon onClick={() => handleStar(id, !starred)} />
+          ) : (
+            <StarOutlineIcon onClick={() => handleStar(id, !starred)} />
+          )}
+        </IconButton>
+        <IconButton>
+          <DeleteForeverIcon onClick={() => handleDelete(id, !deleted)} />
         </IconButton>
       </div>
       <div className="w-full flex justify-between ">
-        <p className="font-medium">{from}</p>
+        <p className="font-medium overflow-hidden h-6 w-[20%]">{from}</p>
         <Link href={`/inbox/${id}`}>
-          <p className="font-medium">
+          <p className="font-medium  w-[80%] overflow-hidden h-6 ">
             {subject}-<span className="font-normal">{message}</span>
           </p>
         </Link>
-        <p className="font-medium px-2">{time}</p>
+        <p className="font-medium px-2  ">{time}</p>
       </div>
     </div>
   );

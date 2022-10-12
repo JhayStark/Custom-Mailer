@@ -5,18 +5,34 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
 
-const OutboxItem = ({ starred, to, subject, message, time, id }) => {
+const OutboxItem = ({
+  starred,
+  to,
+  subject,
+  message,
+  time,
+  id,
+  deleted,
+  handleStar,
+  handleDelete,
+}) => {
   return (
     <div className="flex items-center mr-1 border-b border-gray-400 cursor-pointer">
       <CheckBox />
-      <IconButton>{starred ? <StarIcon /> : <StarOutlineIcon />}</IconButton>
       <IconButton>
-        <DeleteForeverIcon />
+        {starred ? (
+          <StarIcon onClick={() => handleStar(id, !starred)} />
+        ) : (
+          <StarOutlineIcon onClick={() => handleStar(id, !starred)} />
+        )}
+      </IconButton>
+      <IconButton>
+        <DeleteForeverIcon onClick={() => handleDelete(id, !deleted)} />
       </IconButton>
       <div className="w-full flex justify-between ">
-        <p className="font-medium">{to}</p>
+        <p className="font-medium overflow-hidden h-6 w-[20%]">{to}</p>
         <Link href={`/outbox/${id}`}>
-          <p className="font-medium">
+          <p className="font-medium w-[80%] overflow-hidden h-6">
             {subject}-<span className="font-normal">{message}</span>
           </p>
         </Link>

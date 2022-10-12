@@ -1,12 +1,11 @@
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import CheckBox from "@material-ui/core/Checkbox";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
-import { outbox, inbox } from "../data/EmailData";
-import OutboxItem from "../components/OutboxItem";
-import StarredItem from "../components/StarredItem";
-import { getStarred } from "../utils/getEmails";
+import StarredItem from "../../components/StarredItem";
+import { getStarred } from "../../utils/getEmails";
+import { useSession } from "next-auth/react";
 
 export async function getStaticProps() {
   const emails = await getStarred();
@@ -18,7 +17,7 @@ export async function getStaticProps() {
   };
 }
 
-const Drafts = ({ emails }) => {
+const Starred = ({ emails }) => {
   return (
     <div className="flex ">
       <Sidebar />
@@ -40,7 +39,8 @@ const Drafts = ({ emails }) => {
               subject={email.subject}
               message={email.message}
               time={email.time}
-              key={email.id}
+              key={email._id}
+              id={email._id}
             />
           ))}
         </div>
@@ -49,4 +49,4 @@ const Drafts = ({ emails }) => {
   );
 };
 
-export default Drafts;
+export default Starred;

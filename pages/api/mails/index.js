@@ -3,8 +3,8 @@ import db from "../../../lib/dbConnect";
 import User from "../../../models/user";
 
 export default async function handler(req, res) {
-  const fromUser = "634147ced6b76f815b36eeac";
-  const sender = await User.findById(fromUser);
+  const userID = "6341567d4e8ebce1a8403ff5";
+  const sender = await User.findById(userID);
   const now = new Date();
   const mins = now.getMinutes();
   const hours = now.getHours();
@@ -14,8 +14,8 @@ export default async function handler(req, res) {
     await db.connect();
 
     const emails = await Email.find({});
-    const inbox = await Email.find({ to: sender.email });
-    const outbox = await Email.find({ from: sender.email });
+    const inbox = await Email.find({ to: sender.email, deleted: false });
+    const outbox = await Email.find({ from: sender.email, deleted: false });
     const starred = await Email.find({ to: sender.email, starred: true });
     const deleted = await Email.find({ to: sender.email, deleted: true });
 

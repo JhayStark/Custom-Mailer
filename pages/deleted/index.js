@@ -1,12 +1,22 @@
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import CheckBox from "@material-ui/core/Checkbox";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
-import { outbox } from "../data/EmailData";
-import OutboxItem from "../components/OutboxItem";
+import { getDeleted } from "../../utils/getEmails";
+import DeletedItem from "../../components/DeletedItem";
 
-const Deleted = () => {
+export async function getStaticProps() {
+  const emails = await getDeleted();
+
+  return {
+    props: {
+      emails,
+    },
+  };
+}
+
+const Deleted = ({ emails }) => {
   return (
     <div className="flex ">
       <Sidebar />
@@ -29,15 +39,15 @@ const Deleted = () => {
           </IconButton>
         </div>
         <div className="items-center overflow-y-auto h-[32rem]">
-          {outbox.map(({ starred, to, subject, message, sent, read, id }) => (
-            <OutboxItem
-              starred={starred}
-              to={to}
-              subject={subject}
-              message={message}
-              sent={sent}
-              read={read}
-              key={id}
+          {emails.map((email) => (
+            <DeletedItem
+              to={email.to}
+              from={email.from}
+              subject={email.subject}
+              message={email.message}
+              id={email._id}
+              time={email.time}
+              key={email._id}
             />
           ))}
         </div>

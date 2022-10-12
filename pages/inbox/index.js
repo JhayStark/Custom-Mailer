@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { getEmails, getInbox } from "../../utils/getEmails";
+import axios from "axios";
+import { handleStar, handleDelete } from "../../utils/mailAttributes";
 
 export async function getStaticProps() {
   const emails = await getInbox();
@@ -30,6 +32,21 @@ const Inbox = ({ emails }) => {
   }, [status]);
 
   // console.log(data);
+  // const handleStar = async (id, starred) => {
+  //   let value;
+  //   starred ? (value = "true") : (value = "false");
+  //   const res = await axios.post(
+  //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/mails/mailAttributes`,
+  //     { starred: value, id: id }
+  //   );
+  // };
+
+  // const handleDelete = async (id, deleted) => {
+  //   const res = await axios.post(
+  //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/mails/mailAttributes`,
+  //     { deleted: deleted, id: id }
+  //   );
+  // };
 
   return (
     <div className="flex">
@@ -54,6 +71,9 @@ const Inbox = ({ emails }) => {
               time={email.time}
               key={email._id}
               id={email._id}
+              deleted={email.deleted}
+              handleStar={handleStar}
+              handleDelete={handleDelete}
             />
           ))}
         </div>

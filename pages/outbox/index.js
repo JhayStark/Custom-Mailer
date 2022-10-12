@@ -1,11 +1,11 @@
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import CheckBox from "@material-ui/core/Checkbox";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
-import { outbox } from "../data/EmailData";
-import OutboxItem from "../components/OutboxItem";
-import { getOutbox } from "../utils/getEmails";
+import OutboxItem from "../../components/OutboxItem";
+import { getOutbox } from "../../utils/getEmails";
+import { handleStar, handleDelete } from "../../utils/mailAttributes";
 
 export async function getStaticProps() {
   const emails = await getOutbox();
@@ -40,6 +40,10 @@ const Outbox = ({ emails }) => {
               message={email.message}
               time={email.time}
               key={email._id}
+              id={email._id}
+              deleted={email.deleted}
+              handleStar={handleStar}
+              handleDelete={handleDelete}
             />
           ))}
         </div>

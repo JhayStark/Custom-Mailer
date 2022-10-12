@@ -34,10 +34,6 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    deleted: {
-      type: Array,
-      default: [],
-    },
     telephone: {
       type: String,
     },
