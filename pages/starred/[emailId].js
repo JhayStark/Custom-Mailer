@@ -14,20 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { getEmails } from "../../utils/getEmails";
 import Link from "next/link";
 
-export async function getStaticPaths() {
-  const res = await getEmails();
-
-  const paths = res.map((email) => ({
-    params: { emailId: String(email._id) },
-  }));
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const email = await getEmails(context.params.emailId);
 
   return {

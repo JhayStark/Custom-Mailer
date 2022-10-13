@@ -19,15 +19,11 @@ const OutboxItem = ({
   return (
     <div className="flex items-center mr-1 border-b border-gray-400 cursor-pointer">
       <CheckBox />
-      <IconButton>
-        {starred ? (
-          <StarIcon onClick={() => handleStar(id, !starred)} />
-        ) : (
-          <StarOutlineIcon onClick={() => handleStar(id, !starred)} />
-        )}
+      <IconButton onClick={() => handleStar(id, !starred)}>
+        {starred ? <StarIcon /> : <StarOutlineIcon />}
       </IconButton>
-      <IconButton>
-        <DeleteForeverIcon onClick={() => handleDelete(id, !deleted)} />
+      <IconButton onClick={() => handleDelete(id, !deleted)}>
+        <DeleteForeverIcon />
       </IconButton>
       <div className="w-full flex justify-between ">
         <p className="font-medium overflow-hidden h-6 w-[20%]">{to}</p>
