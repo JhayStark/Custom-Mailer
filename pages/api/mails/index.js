@@ -35,42 +35,42 @@ export default async function handler(req, res) {
       const recipientId = to;
       const recipients = recipientId.split(",");
 
-      // for (let i = 0; i <= recipients.length; i++) {
-      //   // console.log(recipients[i]);
-      //   const recipient = await User.findOne({ email: recipients[i] });
-      //   // console.log(recipient);
+      for (let i = 0; i <= recipients.length; i++) {
+        // console.log(recipients[i]);
+        const recipient = await User.findOne({ email: recipients[i] });
+        // console.log(recipient);
+        if (recipient) {
+          const email = await Email.create({
+            from: user.email,
+            to: recipient.email,
+            subject,
+            message,
+            time: time,
+          });
+          await recipient.updateOne({ $push: { inbox: email._id } });
+          await user.updateOne({ $push: { outbox: email._id } });
+          res.status(201).json({ email });
+        } else {
+          res.status(404).json({ message: "recipient not found" });
+        }
+      }
+
+      //   const recipient = await User.findOne({ email: recipientId });
       //   if (recipient) {
       //     const email = await Email.create({
       //       from: user.email,
-      //       to: recipient.email,
+      //       to,
       //       subject,
       //       message,
       //       time: time,
       //     });
+
       //     await recipient.updateOne({ $push: { inbox: email._id } });
       //     await user.updateOne({ $push: { outbox: email._id } });
       //     res.status(201).json({ email });
       //   } else {
       //     res.status(404).json({ message: "recipient not found" });
       //   }
-      // }
-
-      const recipient = await User.findOne({ email: recipientId });
-      if (recipient) {
-        const email = await Email.create({
-          from: user.email,
-          to,
-          subject,
-          message,
-          time: time,
-        });
-
-        await recipient.updateOne({ $push: { inbox: email._id } });
-        await user.updateOne({ $push: { outbox: email._id } });
-        res.status(201).json({ email });
-      } else {
-        res.status(404).json({ message: "recipient not found" });
-      }
     } catch (error) {
       console.log(`${error}`);
     }
