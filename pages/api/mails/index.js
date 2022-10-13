@@ -1,11 +1,10 @@
 import Email from "../../../models/email";
 import db from "../../../lib/dbConnect";
 import User from "../../../models/user";
-import { getToken } from "next-auth/jwt";
 
 export default async function handler(req, res) {
-  const userID = "634675b3e14b58836e6fc7e3";
-  const sender = await User.findById(userID);
+  const userID = req.query.userId || req.body.userId;
+  const user = await User.findById(userID);
   const now = new Date();
   const mins = now.getMinutes();
   const hours = now.getHours();
@@ -15,14 +14,14 @@ export default async function handler(req, res) {
     await db.connect();
 
     const emails = await Email.find({});
-    const inbox = await Email.find({ to: sender.email, deleted: false });
-    const outbox = await Email.find({ from: sender.email, deleted: false });
+    const inbox = await Email.find({ to: user.email, deleted: false });
+    const outbox = await Email.find({ from: user.email, deleted: false });
     const starred = await Email.find({
-      to: sender.email,
+      to: user.email,
       starred: true,
       deleted: false,
     });
-    const deleted = await Email.find({ to: sender.email, deleted: true });
+    const deleted = await Email.find({ to: user.email, deleted: true });
 
     await db.connect();
 
@@ -42,14 +41,14 @@ export default async function handler(req, res) {
         // console.log(recipient);
         if (recipient) {
           const email = await Email.create({
-            from: sender.email,
+            from: user.email,
             to: recipient.email,
             subject,
             message,
             time: time,
           });
           await recipient.updateOne({ $push: { inbox: email._id } });
-          await sender.updateOne({ $push: { outbox: email._id } });
+          await user.updateOne({ $push: { outbox: email._id } });
           res.status(201).json({ email });
         } else {
           res.status(404).json({ message: "recipient not found" });
@@ -59,7 +58,7 @@ export default async function handler(req, res) {
       // const recipient = await User.findOne({ email: recipientId });
       // if (recipient) {
       //   const email = await Email.create({
-      //     from: sender.email,
+      //     from: user.email,
       //     to,
       //     subject,
       //     message,
@@ -67,7 +66,7 @@ export default async function handler(req, res) {
       //   });
 
       //   await recipient.updateOne({ $push: { inbox: email._id } });
-      //   await sender.updateOne({ $push: { outbox: email._id } });
+      //   await user.updateOne({ $push: { outbox: email._id } });
       //   res.status(201).json({ email });
       // } else {
       //   res.status(404).json({ message: "recipient not found" });

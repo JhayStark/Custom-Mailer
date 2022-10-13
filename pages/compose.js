@@ -26,7 +26,7 @@ const Compose = () => {
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/mails`,
-        { ...data, fromUser: session?.user?._id }
+        { ...data, userId: session?.user?._id }
       );
     } catch (error) {
       setError(error.message);

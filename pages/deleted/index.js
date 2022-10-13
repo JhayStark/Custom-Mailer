@@ -5,9 +5,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import { getDeleted } from "../../utils/getEmails";
 import DeletedItem from "../../components/DeletedItem";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  const emails = await getDeleted();
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  const emails = await getDeleted({ userId: session.user._id });
+
+  // console.log(session);
 
   return {
     props: {

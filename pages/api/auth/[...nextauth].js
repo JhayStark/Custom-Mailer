@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import db from "../../../lib/dbConnect";
 import User from "../../../models/user";
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
@@ -65,4 +65,6 @@ export default NextAuth({
       return session;
     },
   },
-});
+};
+
+export default NextAuth(authOptions);

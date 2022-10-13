@@ -11,11 +11,21 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import ReplyIcon from "@mui/icons-material/Reply";
 import PrintIcon from "@mui/icons-material/Print";
 import IconButton from "@material-ui/core/IconButton";
-import { getEmails } from "../../utils/getEmails";
+import { getOutbox } from "../../utils/getEmails";
 import Link from "next/link";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 export async function getServerSideProps(context) {
-  const email = await getEmails(context.params.emailId);
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  const email = await getOutbox({
+    emailId: context.params.emailId,
+    userId: session.user._id,
+  });
 
   return {
     props: {

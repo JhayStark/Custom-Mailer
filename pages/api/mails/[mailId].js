@@ -3,7 +3,7 @@ import Email from "../../../models/email";
 
 export async function handler(req, res) {
   if (req.method === "GET") {
-    const { mailId } = req.params;
+    const { mailId } = req.query.id;
     await db.connect();
 
     const email = await Email.findById(mailId);

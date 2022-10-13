@@ -10,8 +10,14 @@ import React, { useEffect } from "react";
 import { getInbox } from "../../utils/getEmails";
 import { handleStar, handleDelete } from "../../utils/mailAttributes";
 
-export async function getServerSideProps() {
-  const emails = await getInbox();
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
+
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  const emails = await getInbox({ userId: session.user._id });
+
+  // console.log(session);
 
   return {
     props: {

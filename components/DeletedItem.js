@@ -16,7 +16,7 @@ const DeletedItem = ({ to, from, time, subject, message, id }) => {
       </IconButton>
       <div className="w-full flex justify-between ">
         <p className="font-medium overflow-hidden h-6 w-[20%">{from}</p>
-        <Link href={`/inbox/${id}`}>
+        <Link href={`/deleted/${id}`}>
           <p className="font-medium w-[70%] overflow-hidden h-6">
             {subject}-<span className="font-normal">{message}</span>
           </p>

@@ -6,9 +6,12 @@ import IconButton from "@material-ui/core/IconButton";
 import OutboxItem from "../../components/OutboxItem";
 import { getOutbox } from "../../utils/getEmails";
 import { handleStar, handleDelete } from "../../utils/mailAttributes";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  const emails = await getOutbox();
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  const emails = await getOutbox({ userId: session.user._id });
 
   return {
     props: {

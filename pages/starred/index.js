@@ -5,9 +5,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import StarredItem from "../../components/StarredItem";
 import { getStarred } from "../../utils/getEmails";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  const emails = await getStarred();
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  const emails = await getStarred({ userId: session.user._id });
+
+  // console.log(session);
 
   return {
     props: {
@@ -48,4 +53,4 @@ const Starred = ({ emails }) => {
   );
 };
 
-// export default Starred;
+export default Starred;

@@ -4,7 +4,6 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
-import axios from "axios";
 
 const InboxItem = ({
   starred,
