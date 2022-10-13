@@ -15,7 +15,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      emails,
+      emails: emails || [],
     },
   };
 }
@@ -23,6 +23,7 @@ export async function getServerSideProps() {
 const Inbox = ({ emails }) => {
   const { data, status } = useSession();
   const router = useRouter();
+
   useEffect(() => {
     if (status !== "authenticated") {
       router.push("/auth/login");

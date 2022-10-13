@@ -12,7 +12,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      emails,
+      emails: emails || [],
     },
   };
 }
