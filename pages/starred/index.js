@@ -7,7 +7,7 @@ import StarredItem from "../../components/StarredItem";
 import { getStarred } from "../../utils/getEmails";
 import { useSession } from "next-auth/react";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const emails = await getStarred();
 
   return {
