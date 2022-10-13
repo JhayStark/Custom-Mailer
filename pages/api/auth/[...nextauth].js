@@ -50,16 +50,19 @@ export default NextAuth({
     signIn: "/auth/login",
     error: "/auth/login",
   },
-  jwt: {
+  secret: "dWyM6eNcXYUqx55g8i4kZTml047ZnuU3ulL5ILbZW5Y=",
+  session: {
     strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user?._id) token._id = user._id;
+      // console.log("Token", token);
       return token;
     },
     async session({ session, token }) {
       if (token._id) session.user._id = token._id;
+      // console.log("session", session);
       return session;
     },
   },

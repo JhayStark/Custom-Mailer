@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { getEmails, getInbox } from "../../utils/getEmails";
+import { getInbox } from "../../utils/getEmails";
 import axios from "axios";
 import { handleStar, handleDelete } from "../../utils/mailAttributes";
 

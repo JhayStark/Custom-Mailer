@@ -1,9 +1,10 @@
 import Email from "../../../models/email";
 import db from "../../../lib/dbConnect";
 import User from "../../../models/user";
+import { getToken } from "next-auth/jwt";
 
 export default async function handler(req, res) {
-  const userID = "6341567d4e8ebce1a8403ff5";
+  const userID = "634675b3e14b58836e6fc7e3";
   const sender = await User.findById(userID);
   const now = new Date();
   const mins = now.getMinutes();
@@ -30,8 +31,11 @@ export default async function handler(req, res) {
 
       const recipientId = to;
       const recipients = recipientId.split(",");
-      for (let i = 0; i < recipients.length; i++) {
+
+      for (let i = 0; i <= recipients.length; i++) {
+        // console.log(recipients[i]);
         const recipient = await User.findOne({ email: recipients[i] });
+        // console.log(recipient);
         if (recipient) {
           const email = await Email.create({
             from: sender.email,

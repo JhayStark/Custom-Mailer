@@ -39,7 +39,7 @@ const InboxItem = ({
             {subject}-<span className="font-normal">{message}</span>
           </p>
         </Link>
-        <p className="font-medium px-2  ">{time}</p>
+        <p className="font-medium px-2">{time}</p>
       </div>
     </div>
   );
