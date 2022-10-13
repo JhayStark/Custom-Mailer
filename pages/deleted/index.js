@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { getDeleted } from "../../utils/getEmails";
 import DeletedItem from "../../components/DeletedItem";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const emails = await getDeleted();
 
   return {

@@ -12,7 +12,7 @@ import { getInbox } from "../../utils/getEmails";
 import axios from "axios";
 import { handleStar, handleDelete } from "../../utils/mailAttributes";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const emails = await getInbox();
 
   return {

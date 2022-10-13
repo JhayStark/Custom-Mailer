@@ -7,7 +7,7 @@ import OutboxItem from "../../components/OutboxItem";
 import { getOutbox } from "../../utils/getEmails";
 import { handleStar, handleDelete } from "../../utils/mailAttributes";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const emails = await getOutbox();
 
   return {
