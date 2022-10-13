@@ -25,13 +25,6 @@ export async function getServerSideProps(context) {
 }
 
 const EmailDetails = ({ email }) => {
-  // return (
-  //   <div>
-  //     <h1>Email details</h1>
-  //     <hr />
-  //     {email.subject}
-  //   </div>
-  // );
   return (
     <div className="flex ">
       <Sidebar />

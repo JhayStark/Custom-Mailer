@@ -4,12 +4,10 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import InboxItem from "../../components/InboxItem";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { getInbox } from "../../utils/getEmails";
-import axios from "axios";
 import { handleStar, handleDelete } from "../../utils/mailAttributes";
 
 export async function getServerSideProps() {
@@ -30,23 +28,6 @@ const Inbox = ({ emails }) => {
       router.push("/auth/login");
     }
   }, [status]);
-
-  // console.log(data);
-  // const handleStar = async (id, starred) => {
-  //   let value;
-  //   starred ? (value = "true") : (value = "false");
-  //   const res = await axios.post(
-  //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/mails/mailAttributes`,
-  //     { starred: value, id: id }
-  //   );
-  // };
-
-  // const handleDelete = async (id, deleted) => {
-  //   const res = await axios.post(
-  //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/mails/mailAttributes`,
-  //     { deleted: deleted, id: id }
-  //   );
-  // };
 
   return (
     <div className="flex">
