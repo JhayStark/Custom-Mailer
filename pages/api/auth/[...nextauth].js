@@ -50,7 +50,6 @@ export default NextAuth({
     signIn: "/auth/login",
     error: "/auth/login",
   },
-  secret: "dWyM6eNcXYUqx55g8i4kZTml047ZnuU3ulL5ILbZW5Y=",
   session: {
     strategy: "jwt",
   },
