@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import mail1 from "./assests/mail1.jpg";
+import mail1 from "../../assests/mail1.jpg";
 import axios from "axios";
 import { useRouter } from "next/router";
 
