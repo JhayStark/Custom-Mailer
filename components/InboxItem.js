@@ -21,15 +21,11 @@ const InboxItem = ({
     <div className="flex items-center mr-1 cursor-pointer">
       <div className="flex sm:flex-col md:flex-row lg:flex-row">
         <CheckBox />
-        <IconButton>
-          {starred ? (
-            <StarIcon onClick={() => handleStar(id, !starred)} />
-          ) : (
-            <StarOutlineIcon onClick={() => handleStar(id, !starred)} />
-          )}
+        <IconButton onClick={() => handleStar(id, !starred)}>
+          {starred ? <StarIcon /> : <StarOutlineIcon />}
         </IconButton>
-        <IconButton>
-          <DeleteForeverIcon onClick={() => handleDelete(id, !deleted)} />
+        <IconButton onClick={() => handleDelete(id, !deleted)}>
+          <DeleteForeverIcon />
         </IconButton>
       </div>
       <div className="w-full flex justify-between ">

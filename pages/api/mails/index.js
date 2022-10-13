@@ -17,7 +17,11 @@ export default async function handler(req, res) {
     const emails = await Email.find({});
     const inbox = await Email.find({ to: sender.email, deleted: false });
     const outbox = await Email.find({ from: sender.email, deleted: false });
-    const starred = await Email.find({ to: sender.email, starred: true });
+    const starred = await Email.find({
+      to: sender.email,
+      starred: true,
+      deleted: false,
+    });
     const deleted = await Email.find({ to: sender.email, deleted: true });
 
     await db.connect();
