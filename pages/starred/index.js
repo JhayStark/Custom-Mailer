@@ -48,4 +48,4 @@ const Starred = ({ emails }) => {
   );
 };
 
-export default Starred;
+// export default Starred;

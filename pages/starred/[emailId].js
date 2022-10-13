@@ -93,4 +93,4 @@ const EmailDetails = ({ email }) => {
   );
 };
 
-export default EmailDetails;
+// export default EmailDetails;
