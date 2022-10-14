@@ -23,7 +23,7 @@ export const getInbox = async ({ emailId = null, userId }) => {
     return email;
   }
 
-  return inbox;
+  return inbox.reverse();
 };
 
 export const getOutbox = async ({ emailId = null, userId }) => {
@@ -37,7 +37,7 @@ export const getOutbox = async ({ emailId = null, userId }) => {
     return email;
   }
 
-  return outbox;
+  return outbox.reverse();
 };
 
 export const getStarred = async ({ emailId = null, userId }) => {
@@ -51,7 +51,7 @@ export const getStarred = async ({ emailId = null, userId }) => {
     return email;
   }
 
-  return starred;
+  return starred.reverse();
 };
 
 export const getDeleted = async ({ emailId = null, userId }) => {
@@ -65,5 +65,5 @@ export const getDeleted = async ({ emailId = null, userId }) => {
     return email;
   }
 
-  return deleted;
+  return deleted.reverse();
 };
